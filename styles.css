@@ -1,0 +1,305 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+    background: #fafafa;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 24px;
+}
+
+.container {
+    background: #fff;
+    border-radius: 18px;
+    padding: 32px 24px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+    max-width: 420px;
+    width: 100%;
+}
+
+h1 {
+    text-align: center;
+    color: #18181b;
+    margin-bottom: 18px;
+    font-size: 2.2em;
+    letter-spacing: 1px;
+    font-weight: 700;
+}
+
+.intro {
+    text-align: center;
+    color: #52525b;
+    margin-bottom: 32px; /* was 22px */
+    font-size: 1.05em;
+}
+
+.input-section {
+    margin-bottom: 32px; /* add this for spacing below input section */
+}
+
+.input-section h2 {
+    color: #ea580c;
+    text-align: center;
+    margin-bottom: 18px;
+    font-size: 1.2em;
+    font-weight: 600;
+}
+
+.date-inputs {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 22px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.input-group {
+    flex: 1 1 110px;
+    min-width: 110px;
+    max-width: 130px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 7px;
+    color: #18181b;
+    font-weight: 500;
+    font-size: 1em;
+    letter-spacing: 0.5px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1.5px solid #e5e7eb;
+    border-radius: 7px;
+    font-size: 1em;
+    background: #f4f4f5;
+    color: #18181b;
+    transition: border-color 0.2s;
+}
+
+.input-group input:focus {
+    outline: 2px solid #ea580c;
+    outline-offset: 2px;
+    border-color: #ea580c;
+    background: #fff7ed;
+}
+
+.form-buttons {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 8px;
+}
+
+#calculateBtn, #resetBtn {
+    flex: 1 1 120px;
+    padding: 12px 0;
+    font-size: 1em;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+}
+
+#calculateBtn {
+    background: #ea580c;
+    color: #fff;
+}
+
+#calculateBtn:hover {
+    background: #c2410c;
+}
+
+#resetBtn {
+    background: #f4f4f5;
+    color: #ea580c;
+}
+
+#resetBtn:hover {
+    background: #fff7ed;
+    color: #c2410c;
+}
+
+.result-section {
+    display: none;
+    margin-top: 28px;
+    text-align: center;
+    animation: fadeIn 0.5s;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px);}
+    to { opacity: 1; transform: translateY(0);}
+}
+
+.age-display {
+    display: flex;
+    justify-content: center;
+    gap: 18px;
+    margin-top: 18px;
+    flex-wrap: wrap;
+}
+
+.age-item {
+    background: #f4f4f5;
+    padding: 18px 12px;
+    border-radius: 12px;
+    min-width: 80px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.age-item:hover {
+    transform: translateY(-6px) scale(1.05);
+    box-shadow: 0 8px 24px rgba(24, 90, 157, 0.13);
+}
+
+.age-number {
+    display: block;
+    font-size: 2em;
+    color: #18181b;
+    font-weight: bold;
+    animation: popIn 0.5s;
+}
+
+@keyframes popIn {
+    0% { transform: scale(0.7); opacity: 0; }
+    70% { transform: scale(1.2); opacity: 1; }
+    100% { transform: scale(1); }
+}
+
+.age-label {
+    color: #ea580c;
+    font-size: 0.92em;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 4px;
+}
+
+.error-message {
+    color: #b91c1c;
+    background: #fef2f2;
+    text-align: center;
+    margin-top: 18px;
+    padding: 10px;
+    border-radius: 7px;
+    display: none;
+    font-size: 1em;
+}
+
+/* Make copy button and countdown responsive */
+#copyBtn {
+    width: 100%;
+    max-width: 200px;
+    margin: 0 auto;
+    display: block;
+    background: #ea580c;
+    color: #fff;
+    border-radius: 7px;
+    border: none;
+    padding: 10px 0;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+#copyBtn:hover {
+    background: #c2410c;
+}
+
+#birthdayCountdown, #specialMessage {
+    text-align: center;
+    word-break: break-word;
+}
+
+#darkModeToggle {
+    background: none;
+    border: none;
+    font-size: 1.2em;
+    cursor: pointer;
+    color: #18181b;
+    transition: color 0.2s;
+}
+#darkModeToggle:focus {
+    outline: 2px solid #ea580c;
+}
+
+/* --- Dark Mode Styles --- */
+body.dark-mode {
+    background: #18181b;
+}
+body.dark-mode .container {
+    background: #232326;
+    color: #fafafa;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+}
+body.dark-mode h1,
+body.dark-mode .input-group label,
+body.dark-mode .age-number {
+    color: #fafafa;
+}
+body.dark-mode .intro,
+body.dark-mode #birthdayCountdown {
+    color: #d4d4d8;
+}
+body.dark-mode .input-group input {
+    background: #232326;
+    color: #fafafa;
+    border-color: #52525b;
+}
+body.dark-mode .input-group input:focus {
+    background: #18181b;
+    border-color: #ea580c;
+}
+body.dark-mode .age-item {
+    background: #232326;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+}
+body.dark-mode #calculateBtn {
+    background: #ea580c;
+    color: #fff;
+}
+body.dark-mode #resetBtn {
+    background: #232326;
+    color: #ea580c;
+}
+body.dark-mode #copyBtn {
+    background: #ea580c;
+    color: #fff;
+}
+body.dark-mode .error-message {
+    background: #3f1d1d;
+    color: #fca5a5;
+}
+
+@media (max-width: 600px) {
+    body {
+        font-size: 1.08em;
+    }
+    .container {
+        padding: 18px 4px;
+        max-width: 98vw;
+    }
+    .date-inputs, .age-display, .form-buttons {
+        flex-direction: column;
+        gap: 10px;
+        align-items: stretch;
+    }
+    .input-group {
+        max-width: 100%;
+    }
+    #copyBtn {
+        font-size: 0.98em;
+        padding: 9px 0;
+    }
+}
