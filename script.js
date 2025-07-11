@@ -16,7 +16,7 @@ const specialMessage = document.getElementById('specialMessage');
 // Add event listener to the calculate button
 calculateBtn.addEventListener('click', calculateAge);
 
-// Add enter key support
+// Add enter key support for quick calculation
 document.addEventListener('keydown', function(event) {
     if (event.key === 'Enter') {
         event.preventDefault();
@@ -42,6 +42,7 @@ function validateInputs(day, month, year) {
         return 'Year must be between 1800 and the current year.';
     }
 
+    // Checks if the date is actually valid (e.g., not Feb 30)
     const testDate = new Date(year, month - 1, day);
     if (
         testDate.getFullYear() !== year ||
@@ -70,7 +71,7 @@ function calculateAge() {
         return;
     }
 
-    // Save to localStorage
+    // Save last entered birth date for user convenience
     localStorage.setItem('lastBirthDate', JSON.stringify({ day, month, year }));
 
     const birthDate = new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
@@ -80,23 +81,26 @@ function calculateAge() {
 
     displayResults(age);
 
-    // Debugging logs
+    // For debugging purposes
     console.log('Birth date:', birthDate);
     console.log('Current date:', currentDate);
     console.log('Calculated age:', age);
 }
 
+// Calculates the difference in years, months, and days between two dates
 function getAge(birthDate, currentDate) {
     let years = currentDate.getFullYear() - birthDate.getFullYear();
     let months = currentDate.getMonth() - birthDate.getMonth();
     let days = currentDate.getDate() - birthDate.getDate();
 
+    // If days are negative, borrow days from previous month
     if (days < 0) {
         months--;
         const prevMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 0).getDate();
         days += prevMonth;
     }
 
+    // If months are negative, borrow months from previous year
     if (months < 0) {
         years--;
         months += 12;
@@ -107,14 +111,16 @@ function getAge(birthDate, currentDate) {
 
 // Helper: Calculate days until next birthday
 function getDaysUntilNextBirthday(birthDate, currentDate) {
+    // Set next birthday to this year
     let nextBirthday = new Date(currentDate.getFullYear(), birthDate.getMonth(), birthDate.getDate());
+    // If birthday has already passed this year, move to next year
     if (
         currentDate.getMonth() > birthDate.getMonth() ||
         (currentDate.getMonth() === birthDate.getMonth() && currentDate.getDate() > birthDate.getDate())
     ) {
         nextBirthday.setFullYear(currentDate.getFullYear() + 1);
     }
-    // Handle Feb 29 birthdays on non-leap years
+    // Special handling for Feb 29 birthdays on non-leap years
     if (birthDate.getMonth() === 1 && birthDate.getDate() === 29 && !isLeapYear(nextBirthday.getFullYear())) {
         nextBirthday = new Date(nextBirthday.getFullYear(), 2, 1); // March 1
     }
@@ -122,12 +128,12 @@ function getDaysUntilNextBirthday(birthDate, currentDate) {
     return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 }
 
-// Helper: Check leap year
+// Helper: Check if a year is a leap year
 function isLeapYear(year) {
     return (year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0));
 }
 
-// Update displayResults to show special messages
+// Shows the calculated age and extra info (like birthday countdown)
 function displayResults(age) {
     yearsSpan.textContent = age.years;
     monthsSpan.textContent = age.months;
@@ -141,7 +147,7 @@ function displayResults(age) {
         resultSection.style.transform = 'translateY(0)';
     }, 100);
 
-    // Birthday countdown
+    // Calculate and display days left until next birthday
     const birthDate = new Date(parseInt(yearInput.value), parseInt(monthInput.value) - 1, parseInt(dayInput.value));
     const currentDate = new Date();
     const daysLeft = getDaysUntilNextBirthday(birthDate, currentDate);
@@ -151,7 +157,7 @@ function displayResults(age) {
         birthdayCountdown.textContent = `🎂 ${daysLeft} day${daysLeft === 1 ? '' : 's'} until your next birthday.`;
     }
 
-    // Special message for leap year or birthday
+    // Show special message if user was born in a leap year or today is their birthday
     let msg = "";
     if (isLeapYear(birthDate.getFullYear())) {
         msg += `You were born in a leap year! `;
@@ -177,7 +183,7 @@ function hideErrorMessage() {
     resultSection.style.display = 'none';
 }
 
-// Copy age to clipboard
+// Copy age result to clipboard for easy sharing
 if (copyBtn) {
     copyBtn.addEventListener('click', function () {
         const years = yearsSpan.textContent;
@@ -193,7 +199,7 @@ if (copyBtn) {
     });
 }
 
-// Dark mode toggle
+// Toggle dark mode and remember user preference
 darkModeToggle.addEventListener('click', function () {
     document.body.classList.toggle('dark-mode');
     // Save preference
@@ -202,7 +208,7 @@ darkModeToggle.addEventListener('click', function () {
     darkModeToggle.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
 });
 
-// On load, set dark mode if previously chosen
+// On load, set dark mode if previously chosen by user
 if (localStorage.getItem('darkMode') === 'on') {
     document.body.classList.add('dark-mode');
     darkModeToggle.textContent = '☀️';
@@ -210,7 +216,7 @@ if (localStorage.getItem('darkMode') === 'on') {
     darkModeToggle.textContent = '🌙';
 }
 
-// Load last calculation if available
+// Restore last entered birth date if available (user convenience)
 window.addEventListener('DOMContentLoaded', function () {
     const last = localStorage.getItem('lastBirthDate');
     if (last) {
@@ -225,44 +231,28 @@ window.addEventListener('DOMContentLoaded', function () {
     }
 });
 
-// Auto-focus and keyboard navigation
+// Auto-focus logic for better user experience when entering date
 dayInput.addEventListener('input', function () {
     const dayValue = parseInt(dayInput.value);
-    // Only move focus if the day is valid (1-31) and the length is 2, or if it's a single digit 1-9
-    // For single digits, if the user types 4, it should ideally wait for a second digit.
-    // If they type 3 and then press a key that's not 0 or 1, then it's invalid.
-    // The current logic 'parseInt(dayInput.value) > 3' is a bit too broad.
-    // Let's focus on length and valid ranges.
-
+    // Only move focus if the day is valid and user has entered two digits
     if (dayInput.value.length === 2 && dayValue >= 1 && dayValue <= 31) {
         monthInput.focus();
-    } else if (dayInput.value.length === 1 && dayValue >= 1 && dayValue <= 9) {
-        // If it's a single digit from 1-9, we generally wait for the second digit.
-        // However, if the user enters '0' and then a number, that's fine (e.g., 01).
-        // If they enter '3' and then '2', it's 32 (invalid).
-        // This initial check for single digit is more about preventing immediate focus shift
-        // when a valid single digit is entered, allowing for two-digit input.
-        // The more robust validation will happen during the actual calculation or on blur.
-        // For now, if they enter '3' and then type ' ' or another character, it stays.
-        // We'll primarily rely on the length check for auto-focus.
     }
+    // For single digits, we wait for the second digit before moving focus
 });
 
 monthInput.addEventListener('input', function () {
     const monthValue = parseInt(monthInput.value);
-    // Only move focus if the month is valid (1-12) and the length is 2, or if it's a single digit 1
-    // (e.g., for January, if user types '1', they might type '0' next. If they type '1' then '3', it's 13, invalid)
+    // Move focus to year only if month is valid and two digits are entered
     if (monthInput.value.length === 2 && monthValue >= 1 && monthValue <= 12) {
         yearInput.focus();
-    } else if (monthInput.value.length === 1 && monthValue === 1) {
-        // If they type '1', we wait for the second digit (0, 1, or 2).
-        // This prevents moving focus after just '1' is typed for '10', '11', '12'.
     }
+    // If user types '1', wait for second digit (for months 10, 11, 12)
 });
 
 yearInput.addEventListener('keydown', function (event) {
     if (event.key === 'Enter') {
-        event.preventDefault(); // Prevent default Enter key behavior (e.g., form submission)
-        calculateAge(); // Trigger your age calculation
+        event.preventDefault(); // Prevent form submission
+        calculateAge(); // Calculate age immediately
     }
 });
