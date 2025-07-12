@@ -19,12 +19,12 @@ This is a simple yet robust Age Calculator web app built during the CodeAlpha We
 
 ---
 
-##  Screenshots
+## Screenshots
 
-> Screenshots saved in [`/images/screenshots/`](/images/screenshots/) directory:
-
-![Age Calculator Screenshot 1](images/screenshots/screenshot1.png)![Age Calculator Screenshot 2](images/screenshots/screenshot2.png)![Age Calculator Screenshot 3](images/screenshots/screenshot3.png)![Age Calculator Screenshot 4](images/screenshots/screenshot4.png)![Age Calculator Screenshot 5](images/screenshots/screenshot5.png) 
-
+| | | |
+|--|--|--|
+| ![](images/screenshots/screenshot1.png) | ![](images/screenshots/screenshot2.png) | ![](images/screenshots/screenshot3.png) |
+| ![](images/screenshots/screenshot4.png) | ![](images/screenshots/screenshot5.png) |  |
 ---
 
 ##  Features
