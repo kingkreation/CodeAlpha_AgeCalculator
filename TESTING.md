@@ -31,15 +31,15 @@ This document outlines the manual testing process used to verify the core featur
 | Test ID | Test Case              | Input           | Expected Output                 | Actual Output               | Status |
 |---------|------------------------|-----------------|---------------------------------|-----------------------------|--------|
 | TC001   | No input submitted     | (blank)         | Show error message              | Error message shown         | ✅ Pass |
-| TC002   | Valid DOB: 2000-01-01  | 2000-01-01      | Correct age                     | Correct age displayed       | ✅ Pass |
-| TC003   | DOB = Today            | (Today’s date)  | Age = 0                         | Age = 0 shown               | ✅ Pass |
-| TC004   | Future DOB             | 2100-01-01      | Error message                   | Blocked with error          | ✅ Pass |
-| TC005   | Leap Year DOB          | 2004-02-29      | Accurate result                 | Correct age calculated      | ✅ Pass |
-| TC006   | Click “Copy” button    | Any DOB         | Copied feedback                 | “Copied!” alert shown       | ✅ Pass |
+| TC002   | Valid DOB: 02-11-2007  | 02-11-2007      | Correct age                     | Correct age displayed       | ✅ Pass |
+| TC003   | DOB = Present day      | Today’s date (12-07-2025)  | Age = 0                         | Age = 0 shown               | ✅ Pass |
+| TC004   | Future DOB             | 01-01-2030      | Error message                   | Blocked with error          | ✅ Pass |
+| TC005   | Leap Year DOB          | 29-02-2004      | Accurate result                 | Correct age calculated with leap year message     | ✅ Pass |
+| TC006   | Click “Copy” button    | Any DOB (04-10-2004)        | Copied feedback                 | “Copied!” alert shown       | ✅ Pass |
 | TC007   | Enable dark mode       | Toggle button   | Dark theme active               | Background + text updated   | ✅ Pass |
-| TC008   | Countdown message      | Valid DOB       | Time till next birthday         | Countdown shown             | ✅ Pass |
-| TC009 | Invalid date format | 01/01/2000 | Error message | Format error shown | ✅ Pass |
-| TC010 | Month overflow | 2023-13-01 | Error message | "Invalid month" alert | ✅ Pass |
+| TC008   | Countdown message      | Valid DOB (02-06-2006)      | Time till next birthday         | Countdown (🎂 324 days until your next birthday.) shown             | ✅ Pass |
+| TC009 | Invalid date format | 2003-11-27 | Error message | Error (Day must be between 1 and 31.) shown | ✅ Pass |
+| TC010 | Month overflow | 12-13-1999 | Error message | "Month must be between 1 and 12." alert | ✅ Pass |
 
 ---
 
@@ -50,29 +50,29 @@ This document outlines the manual testing process used to verify the core featur
 #### Core Functionality Tests
 
 1. **TC001 - Empty Input Validation**  
-   ![Empty Input Error](/images/testing/tc01-empty.jpg)  
+   ![Empty Input Error](/images/testing/tc01-empty.png)  
    *Verifies error handling when no date is entered*
 
 2. **TC002 - Valid Date Calculation**  
-   ![2000-01-01 Calculation](/images/testing/tc02-valid.jpg)  
+   ![27-06-2003 Calculation](/images/testing/tc02-valid.png)  
    *Standard date calculation verification*
 
 3. **TC003 - Today's Date Handling**  
-   ![Age Zero Calculation](/images/testing/tc03-today.jpg)  
+   ![Age Zero Calculation](/images/testing/tc03-today.png)  
    *Edge case: DOB = current date*
 
 #### Edge Case Validation
 
 4. **TC004 - Future Date Blocking**  
-   ![Future Date Error](/images/testing/tc04-future.jpg)  
+   ![Future Date Error](/images/testing/tc04-future.png)  
    *System properly rejects dates beyond current date*
 
 5. **TC005 - Leap Year Calculation**  
-   ![Leap Year Handling](/images/testing/tc05-leap.jpg)  
+   ![Leap Year Handling](/images/testing/tc05-leap.png)  
    *February 29th birthday calculation*
 
 6. **TC006 - Copy Functionality**  
-   ![Copy Feedback](/images/testing/tc06-copy.jpg)  
+   ![Copy Feedback](/images/testing/tc06-copy.png)  
    *Visual confirmation of "Copied!" toast message*
 
 #### UI/UX Tests
@@ -80,20 +80,20 @@ This document outlines the manual testing process used to verify the core featur
 7. **TC007 - Dark Mode Toggle**  
    | Light Mode | Dark Mode |
    |------------|-----------|
-   | ![Light Mode](/images/testing/tc07-light.jpg) | ![Dark Mode](/images/testing/tc07-dark.jpg) |
+   | ![Light Mode](/images/testing/tc07-light.png) | ![Dark Mode](/images/testing/tc07-dark.png) |
 
 8. **TC008 - Birthday Countdown**  
-   ![Countdown Timer](/images/testing/tc08-countdown.jpg)  
+   ![Countdown Timer](/images/testing/tc08-countdown.png)  
    *Verifies dynamic countdown display*
 
 #### Additional Test Cases
 
 9. **TC009 - Invalid Date Format**  
-   ![Format Error](/images/testing/tc09-format.jpg)  
+   ![Format Error](/images/testing/tc09-format.png)  
    *Handling of MM/DD/YYYY format attempts*
 
 10. **TC010 - Month Overflow Validation**  
-    ![Month Error](/images/testing/tc10-month.jpg)  
+    ![Month Error](/images/testing/tc10-month.png)  
     *Rejects invalid months > 12*
 
 ---
