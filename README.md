@@ -1,6 +1,6 @@
 #  CodeAlpha Age Calculator
 
- [Live Demo](#)   |    [View Source Code](https://github.com/kingkreation/CodeAlpha_AgeCalculator.git)
+ [Live Demo](*Hosting in progress*)   |    [View Source Code](https://github.com/kingkreation/CodeAlpha_AgeCalculator.git)
 
 ---
 
@@ -21,7 +21,9 @@ This is a simple yet robust Age Calculator web app built during the CodeAlpha We
 
 ##  Screenshots
 
-![Age Calculator Screenshot 1](screenshots/screenshot1.png)![Age Calculator Screenshot 2](screenshots/screenshot2.png)![Age Calculator Screenshot 3](screenshots/screenshot3.png)![Age Calculator Screenshot 4](screenshots/screenshot4.png)![Age Calculator Screenshot 5](screenshots/screenshot5.png) 
+> Screenshots saved in [`/images/screenshots/`](/images/screenshots/) directory:
+
+![Age Calculator Screenshot 1](images/screenshots/screenshot1.png)![Age Calculator Screenshot 2](images/screenshots/screenshot2.png)![Age Calculator Screenshot 3](images/screenshots/screenshot3.png)![Age Calculator Screenshot 4](images/screenshots/screenshot4.png)![Age Calculator Screenshot 5](images/screenshots/screenshot5.png) 
 
 ---
 
@@ -49,7 +51,7 @@ To view test cases, scenarios, and evidence:
 
 ## 👨🏽‍💻 Author
 
-**Joshua Kolawole Obaloluwa**  
+**Joshua Kolawole** (CA/JU3/3835)  
 - BSc Physics
 - Web Development Intern @ CodeAlpha  
 - QA Trainee @ TestarsQuarter  
