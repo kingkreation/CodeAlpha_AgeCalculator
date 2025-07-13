@@ -90,7 +90,7 @@ This document outlines the manual testing process used to verify the core featur
 
 9. **TC009 - Invalid Date Format**  
    ![Format Error](/images/testing/tc09-format.png)  
-   *Handling of MM/DD/YYYY format attempts*
+   *Handling of YYYY/MM/DD format attempts*
 
 10. **TC010 - Month Overflow Validation**  
     ![Month Error](/images/testing/tc10-month.png)  
