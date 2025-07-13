@@ -23,7 +23,7 @@ This is a simple yet robust Age Calculator web app built during the CodeAlpha We
 
 | | | |
 |--|--|--|
-| ![alt](images/screenshots/screenshot1.png) | ![alt](images/screenshots/screenshot2.png) | ![alt](images/screenshots/screenshot3.png) |
+| ![alt screnshot 1](images/screenshots/screenshot1.png) | ![alt](images/screenshots/screenshot2.png) | ![alt](images/screenshots/screenshot3.png) |
 | ![alt](images/screenshots/screenshot4.png) | ![alt](images/screenshots/screenshot5.png) |  |
 ---
 
