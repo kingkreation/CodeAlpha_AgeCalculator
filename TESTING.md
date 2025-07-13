@@ -50,7 +50,7 @@ This document outlines the manual testing process used to verify the core featur
 #### Core Functionality Tests
 
 1. **TC001 - Empty Input Validation**  
-   ![Empty Input Error](/images/testing/tc01-empty.png)  
+   ![Empty Input Error]( https://drive.google.com/uc?export=view&id=1UaplxLY3Nz38ZGRy4EEmcgapeiRCKHjD)    
    *Verifies error handling when no date is entered*
 
 2. **TC002 - Valid Date Calculation**  
