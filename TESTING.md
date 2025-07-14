@@ -30,14 +30,14 @@ This document outlines the manual testing process used to verify the core featur
 
 | Test ID | Test Case | Input | Expected Output | Actual Output | Status |
 |---------|------------------------|-----------------|---------------------------------|-----------------------------|--------|
-| TC001 | No input submitted | (blank) | Show error message | Error message shown | ✅ Pass |
-| TC002 | Valid DOB: 02-11-2007 | 02-11-2007 | Correct age | Correct age displayed | ✅ Pass |
-| TC003 | DOB = Present day | Today’s date (12-07-2025) | Age = 0 | Age = 0 shown | ✅ Pass |
-| TC004 | Future DOB | 01-01-2030 | Error message | Blocked with error | ✅ Pass |
+| TC001 | No input submitted | (blank) | Show error message | Error message (please fill in all feilds) shown | ✅ Pass |
+| TC002 | Valid DOB: 02-11-2007 | 02-11-2007 | Correct age | Correct age displayed (My age is 17 years, 8 months, and 12 days.) | ✅ Pass |
+| TC003 | DOB = Present day | Today’s date (14-07-2025) | Age = 0 | Age = 0 shown | ✅ Pass |
+| TC004 | Future DOB | 01-01-2030 | Error message | Blocked with error (Year must be between 1800 and the current year.) | ✅ Pass |
 | TC005 | Leap Year DOB | 29-02-2004 | Accurate result | Correct age calculated with leap year message | ✅ Pass |
 | TC006 | Click “Copy” button | Any DOB (04-10-2004) | Copied feedback | “Copied!” alert shown | ✅ Pass |
 | TC007 | Enable dark mode | Toggle button | Dark theme active | Background + text updated | ✅ Pass |
-| TC008 | Countdown message | Valid DOB (02-06-2006) | Time till next birthday | Countdown (🎂 324 days until your next birthday.) shown | ✅ Pass |
+| TC008 | Countdown message | Valid DOB (02-06-2006) | Time till next birthday | Countdown (🎂 323 days until your next birthday.) shown | ✅ Pass |
 | TC009 | Clear/Reset button | Enter DOB, click "Clear", then "Reset" | Inputs clear, then results reset | Inputs cleared, then results, total time, and messages reset | ✅ Pass |
 | TC010 | Enter key for calculation | Valid DOB, press Enter | Age calculated and displayed | Age calculated and displayed | ✅ Pass |
 
@@ -54,7 +54,7 @@ This document outlines the manual testing process used to verify the core featur
     *Verifies error handling when no date is entered*
 
 2.  **TC002 - Valid Date Calculation**
-    ![27-06-2003 Calculation](/images/testing/tc02-valid.png)
+    ![11-02-2007 Calculation](/images/testing/tc02-valid.png)
     *Standard date calculation verification*
 
 3.  **TC003 - Today's Date Handling**
@@ -89,7 +89,7 @@ This document outlines the manual testing process used to verify the core featur
 #### Additional Test Cases
 
 9.  **TC009 - Clear/Reset Button Functionality**   
-    ![Clear/Reset](/images/testing/tc09-clear/reset.png)    
+    ![Clear/Reset](/images/testing/tc09-clear-reset.png)    
     *Ensures the "Clear" and "Reset Results" states function correctly.*
 
 10. **TC010 - Enter Key Calculation**  
