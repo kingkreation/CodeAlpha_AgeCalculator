@@ -89,9 +89,11 @@ This document outlines the manual testing process used to verify the core featur
 #### Additional Test Cases
 
 9.  **TC009 - Clear/Reset Button Functionality**   
+    ![Clear/Reset](/images/testing/tc09-clear/reset.png)    
     *Ensures the "Clear" and "Reset Results" states function correctly.*
 
 10. **TC010 - Enter Key Calculation**  
+    ![Enter](/images/testing/tc10-enter.png)    
     *Confirms that pressing the "Enter" key triggers the age calculation.*
 
 ---
