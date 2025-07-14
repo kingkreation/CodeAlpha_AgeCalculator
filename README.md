@@ -40,7 +40,15 @@ This is a simple yet robust Age Calculator web app built during the CodeAlpha We
 - "Enter" key support for quick calculation
 - Saves last input using localStorage
 - Countdown to next birthday
+- Utilizes UTC for age calculation to ensure universal consistency and precision.
 - Fully tested using manual QA test cases (see `TESTING.md`)
+
+---
+
+## Technical Details
+
+**UTC-Based Date Calculations:**
+The application performs its core age and total time-lived calculations using Universal Coordinated Time (UTC). This design choice ensures that results are consistent globally, independent of the user's local timezone or Daylight Saving Time adjustments, providing precise and unambiguous measurements of time.
 
 ---
 

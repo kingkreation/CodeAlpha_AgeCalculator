@@ -107,8 +107,9 @@ This document outlines the manual testing process used to verify the core featur
 - The "Clear" button effectively resets inputs, and the "Reset Results" state clears all calculated data.
 - The auto-focus feature between date input fields works smoothly, enhancing user experience.
 - Pressing the "Enter" key provides a convenient alternative to clicking the calculate button.
-- Consistent behavior even after multiple inputs — no freezing or crashing
 - No performance degradation observed during stress testing (50+ consecutive calculations)
+- Age calculations are performed using UTC (Universal Coordinated Time) to ensure consistent and precise results globally, independent of local time zones.
+- Consistent behavior even after multiple inputs — no freezing or crashing
 
 ---
 
