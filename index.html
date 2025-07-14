@@ -6,14 +6,17 @@
     <title>AGE CALCULATOR</title>
     <link rel="stylesheet" href="styles.css" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Hourglass favicon -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⏳</text></svg>">
   </head>
   <body>
       <div class="container">
           <h1>Age Calculator</h1>
           <p class="intro">
-              Welcome! Curious about your exact age in years, months, and days? Enter your date of birth below and let’s find out together.
+              Welcome! Curious about your exact age in years, months, and days? Enter your date of birth below and let's find out together.
           </p>
+          
+          <!-- Input section -->
           <div class="input-section">
               <h2>Enter Your Date of Birth</h2>
               <form id="ageForm" autocomplete="off">
@@ -34,17 +37,21 @@
                           <input type="number" id="year" name="year" min="1800" max="2025" placeholder="YYYY" required>
                       </div>
                   </div>
+                  
+                  <!-- Form buttons -->
                   <div class="form-buttons">
                       <button type="button" id="calculateBtn">Calculate Age</button>
-                      <button type="reset" id="resetBtn">Clear</button>
+                      <button type="button" id="clearResetBtn">Clear</button>
                   </div>
-                  <!-- Dark mode toggle button -->
+                  
+                  <!-- Dark mode toggle -->
                   <div style="text-align:right; margin-top:10px;">
                       <button id="darkModeToggle" type="button" aria-label="Toggle dark mode" style="font-size:1.2em; background:none; border:none; cursor:pointer;">🌙</button>
                   </div>
               </form>
           </div>
 
+          <!-- Results section -->
           <div class="result-section" id="resultSection">
                 <h2>Your Age</h2>
                 <div class="age-display">
@@ -64,14 +71,25 @@
                         <span class="age-label">Days</span>
                     </div>
                 </div>
-                <!-- Button to copy age result -->
+                
+                <!-- Copy button -->
                 <button id="copyBtn" type="button" style="margin-top:12px;">Copy Age</button>
-                <!-- Countdown to next birthday will appear here -->
+                
+                <!-- Birthday countdown -->
                 <div id="birthdayCountdown" style="margin-top:10px; font-size:0.98em; color:#52525b;"></div>
-                <!-- Special messages (e.g., leap year, birthday wishes) -->
+                
+                <!-- Time alive display -->
+                <div id="timeAlive" class="compact-display">
+                You've lived for <span id="totalDays">0</span> days, 
+                <span id="totalHours">0</span> hours, 
+                <span id="totalSeconds">0</span> seconds
+                </div>
+                
+                <!-- Special messages -->
                 <div id="specialMessage" style="margin-top:8px; font-size:1em; color:#ea580c;"></div>
           </div>
           
+          <!-- Error message container -->
           <div class="error-message" id="errorMessage"></div>
       </div>
 

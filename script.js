@@ -12,7 +12,54 @@ const copyBtn = document.getElementById('copyBtn');
 const birthdayCountdown = document.getElementById('birthdayCountdown');
 const darkModeToggle = document.getElementById('darkModeToggle');
 const specialMessage = document.getElementById('specialMessage');
+const clearResetBtn = document.getElementById('clearResetBtn');
 
+// Clear/reset button functionality
+clearResetBtn.addEventListener('click', function() {
+    if(clearResetBtn.textContent === 'Clear') {
+        // First click clears the inputs
+        dayInput.value = '';
+        monthInput.value = ''; 
+        yearInput.value = '';
+        errorMesssage.style.display = 'none';
+
+        // Change button to reset mode
+        clearResetBtn.textContent = 'Reset Results';
+    } else {
+        // Second click: Reset everything
+        resetAll();
+        // Change button back to clear mode
+        clearResetBtn.textContent = 'Clear';
+    }
+});
+
+// Reset all results and messages
+function resetAll() {
+    resultSection.style.display = 'none';
+    errorMesssage.textContent = 'Kindly input your birth date to calculate your age.';
+    errorMesssage.style.display = 'none';
+    yearsSpan.textContent = '0';
+    monthsSpan.textContent = '0';
+    daysSpan.textContent = '0';
+    birthdayCountdown.textContent = '';
+    specialMessage.textContent = '';
+    document.getElementById('totalDays').textContent = '0';
+    document.getElementById('totalHours').textContent = '0';
+    document.getElementById('totalSeconds').textContent = '0';
+}
+
+// Reset button to "clear" when user starts typing
+function resetButtonToClear() {
+    if (clearResetBtn.textContent === 'Reset Results') {
+        clearResetBtn.textContent = 'Clear';
+    }
+}
+
+// Add event listeners to input changes
+dayInput.addEventListener('input', resetButtonToClear);
+monthInput.addEventListener('input', resetButtonToClear);
+yearInput.addEventListener('input', resetButtonToClear);
+    
 // Add event listener to the calculate button
 calculateBtn.addEventListener('click', calculateAge);
 
@@ -59,44 +106,55 @@ function validateInputs(day, month, year) {
 
 function calculateAge() {
     resultSection.style.display = 'none';
-    errorMesssage.textContent = 'Kindly input your birth date to calculate your age.';
+    errorMesssage.style.display = 'none';
 
     const day = dayInput.value;
     const month = monthInput.value;
     const year = yearInput.value;
 
-    const error = validateInputs(day, month, year);
-    if (error) {
-        showErrorMessage(error);
+    // Validate inputs before proceeding
+    const validationError = validateInputs(day, month, year);
+    if (validationError) {
+        showErrorMessage(validationError);
         return;
     }
 
-    // Save last entered birth date for user convenience
-    localStorage.setItem('lastBirthDate', JSON.stringify({ day, month, year }));
-
-    const birthDate = new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
-    const currentDate = new Date();
-
-    const age = getAge(birthDate, currentDate);
+    // Create UTC dates for consistent calculations across time zones
+    const birthDate = new Date(Date.UTC(
+        parseInt(year),
+        parseInt(month) - 1,
+        parseInt(day)
+    ));
+    const currentUTCDate = new Date(Date.UTC(
+        new Date().getUTCFullYear(),
+        new Date().getUTCMonth(),
+        new Date().getUTCDate()
+    ));
+    
+    const age = getAge(birthDate, currentUTCDate);
 
     displayResults(age);
 
+    // Save last entered birth date for user convenience
+    const birthDateData = { day, month, year };
+    localStorage.setItem('lastBirthDate', JSON.stringify(birthDateData));
+
     // For debugging purposes
     console.log('Birth date:', birthDate);
-    console.log('Current date:', currentDate);
+    console.log('Current date:', currentUTCDate);
     console.log('Calculated age:', age);
 }
 
 // Calculates the difference in years, months, and days between two dates
 function getAge(birthDate, currentDate) {
-    let years = currentDate.getFullYear() - birthDate.getFullYear();
-    let months = currentDate.getMonth() - birthDate.getMonth();
-    let days = currentDate.getDate() - birthDate.getDate();
+    let years = currentDate.getUTCFullYear() - birthDate.getUTCFullYear();
+    let months = currentDate.getUTCMonth() - birthDate.getUTCMonth();
+    let days = currentDate.getUTCDate() - birthDate.getUTCDate();
 
     // If days are negative, borrow days from previous month
     if (days < 0) {
         months--;
-        const prevMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 0).getDate();
+        const prevMonth = new Date(Date.UTC(currentDate.getUTCFullYear(), currentDate.getUTCMonth(), 0)).getUTCDate();
         days += prevMonth;
     }
 
@@ -110,22 +168,27 @@ function getAge(birthDate, currentDate) {
 }
 
 // Helper: Calculate days until next birthday
-function getDaysUntilNextBirthday(birthDate, currentDate) {
-    // Set next birthday to this year
-    let nextBirthday = new Date(currentDate.getFullYear(), birthDate.getMonth(), birthDate.getDate());
-    // If birthday has already passed this year, move to next year
-    if (
-        currentDate.getMonth() > birthDate.getMonth() ||
-        (currentDate.getMonth() === birthDate.getMonth() && currentDate.getDate() > birthDate.getDate())
-    ) {
-        nextBirthday.setFullYear(currentDate.getFullYear() + 1);
+function getDaysUntilNextBirthday(birthDate, currentUTCDate) {
+    // UTC-based calculation
+    let nextBirthday = new Date(Date.UTC(
+        currentUTCDate.getUTCFullYear(),
+        birthDate.getUTCMonth(),
+        birthDate.getUTCDate()
+    ));
+    
+    // If birthday passed this year, move to next year
+    if (currentUTCDate > nextBirthday) {
+        nextBirthday.setUTCFullYear(currentUTCDate.getUTCFullYear() + 1);
     }
-    // Special handling for Feb 29 birthdays on non-leap years
-    if (birthDate.getMonth() === 1 && birthDate.getDate() === 29 && !isLeapYear(nextBirthday.getFullYear())) {
-        nextBirthday = new Date(nextBirthday.getFullYear(), 2, 1); // March 1
+    
+    // Handle Feb 29 for non-leap years
+    if (birthDate.getUTCMonth() === 1 && 
+        birthDate.getUTCDate() === 29 && 
+        !isLeapYear(nextBirthday.getUTCFullYear())) {
+        nextBirthday = new Date(Date.UTC(nextBirthday.getUTCFullYear(), 2, 1));
     }
-    const diffTime = nextBirthday - currentDate;
-    return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    
+    return Math.ceil((nextBirthday - currentUTCDate) / (1000 * 60 * 60 * 24));
 }
 
 // Helper: Check if a year is a leap year
@@ -135,9 +198,48 @@ function isLeapYear(year) {
 
 // Shows the calculated age and extra info (like birthday countdown)
 function displayResults(age) {
+    // UTC Date objects for consistent calculations
+    const birthDate = new Date(Date.UTC(
+        parseInt(yearInput.value),
+        parseInt(monthInput.value) - 1,
+        parseInt(dayInput.value)
+    ));
+    const currentDate = new Date(); // Local time for display purposes
+    const currentUTCDate = new Date(Date.UTC(
+        currentDate.getUTCFullYear(),
+        currentDate.getUTCMonth(),
+        currentDate.getUTCDate()
+    ));
+
+    // Update age display
     yearsSpan.textContent = age.years;
     monthsSpan.textContent = age.months;
     daysSpan.textContent = age.days;
+
+    // Calculate total time alive using UTC timestamps
+    const totalMs = currentUTCDate.getTime() - birthDate.getTime();
+    document.getElementById('totalDays').textContent = Math.floor(totalMs / (1000 * 60 * 60 * 24)).toLocaleString();
+    document.getElementById('totalHours').textContent = Math.floor(totalMs / (1000 * 60 * 60)).toLocaleString();
+    document.getElementById('totalSeconds').textContent = Math.floor(totalMs / 1000).toLocaleString();
+
+    // Calculate and display days left until next birthday (UTC)
+    const daysLeft = getDaysUntilNextBirthday(birthDate, currentUTCDate);
+    if (daysLeft === 0) {
+        birthdayCountdown.textContent = "🎉 Happy Birthday!";
+    } else {
+        birthdayCountdown.textContent = `🎂 ${daysLeft} day${daysLeft === 1 ? '' : 's'} until your next birthday.`;
+    }
+
+    // Show special message if user was born in a leap year or today is their birthday (UTC)
+     let msg = "";
+    if (isLeapYear(birthDate.getUTCFullYear())) {
+        msg += `You were born in a leap year! `;
+    }
+    if (birthDate.getUTCDate() === currentUTCDate.getUTCDate() && 
+        birthDate.getUTCMonth() === currentUTCDate.getUTCMonth()) {
+        msg += `Today is your birthday! 🎈`;
+    }
+    specialMessage.textContent = msg;
 
     resultSection.style.display = 'block';
     resultSection.style.opacity = 0;
@@ -146,29 +248,6 @@ function displayResults(age) {
         resultSection.style.opacity = 1;
         resultSection.style.transform = 'translateY(0)';
     }, 100);
-
-    // Calculate and display days left until next birthday
-    const birthDate = new Date(parseInt(yearInput.value), parseInt(monthInput.value) - 1, parseInt(dayInput.value));
-    const currentDate = new Date();
-    const daysLeft = getDaysUntilNextBirthday(birthDate, currentDate);
-    if (daysLeft === 0) {
-        birthdayCountdown.textContent = "🎉 Happy Birthday!";
-    } else {
-        birthdayCountdown.textContent = `🎂 ${daysLeft} day${daysLeft === 1 ? '' : 's'} until your next birthday.`;
-    }
-
-    // Show special message if user was born in a leap year or today is their birthday
-    let msg = "";
-    if (isLeapYear(birthDate.getFullYear())) {
-        msg += `You were born in a leap year! `;
-    }
-    if (
-        birthDate.getDate() === currentDate.getDate() &&
-        birthDate.getMonth() === currentDate.getMonth()
-    ) {
-        msg += `Today is your birthday! 🎈`;
-    }
-    specialMessage.textContent = msg;
 }
 
 function showErrorMessage(message) {
@@ -239,6 +318,9 @@ dayInput.addEventListener('input', function () {
         monthInput.focus();
     }
     // For single digits, we wait for the second digit before moving focus
+
+    // Reset error message when user starts typing
+    errorMesssage.style.display = 'none';
 });
 
 monthInput.addEventListener('input', function () {
@@ -248,6 +330,14 @@ monthInput.addEventListener('input', function () {
         yearInput.focus();
     }
     // If user types '1', wait for second digit (for months 10, 11, 12)
+
+    // Reset error message when user starts typing
+    errorMesssage.style.display = 'none';
+});
+
+yearInput.addEventListener('input', function () {
+    // Reset error message when user starts typing
+    errorMesssage.style.display = 'none';
 });
 
 yearInput.addEventListener('keydown', function (event) {

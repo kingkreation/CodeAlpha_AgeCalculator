@@ -1,3 +1,4 @@
+/* Reset and base styles */
 * {
     margin: 0;
     padding: 0;
@@ -14,6 +15,7 @@ body {
     padding: 24px;
 }
 
+/* Main container */
 .container {
     background: #fff;
     border-radius: 18px;
@@ -39,6 +41,7 @@ h1 {
     font-size: 1.05em;
 }
 
+/* Input section */
 .input-section {
     margin-bottom: 32px; /* add this for spacing below input section */
 }
@@ -92,6 +95,7 @@ h1 {
     background: #fff7ed;
 }
 
+/* Form buttons */
 .form-buttons {
     display: flex;
     gap: 12px;
@@ -99,7 +103,7 @@ h1 {
     margin-top: 8px;
 }
 
-#calculateBtn, #resetBtn {
+#calculateBtn, #clearResetBtn {
     flex: 1 1 120px;
     padding: 12px 0;
     font-size: 1em;
@@ -116,20 +120,69 @@ h1 {
     color: #fff;
 }
 
+#clearResetBtn {
+    background: #f4f4f5;
+    color: #ea580c;
+    transition: background 0.3s, color 0.3s;
+}
+
 #calculateBtn:hover {
     background: #c2410c;
 }
 
-#resetBtn {
-    background: #f4f4f5;
-    color: #ea580c;
-}
-
-#resetBtn:hover {
+#clearResetBtn:hover {
     background: #fff7ed;
     color: #c2410c;
 }
 
+#clearResetBtn {
+    transition: all 0.3s ease;
+}
+
+#calculateBtn:focus {
+    outline: 2px solid #ea580c;
+}
+
+/* Copy button and countdown */
+#copyBtn {
+    width: 100%;
+    max-width: 200px;
+    margin: 0 auto;
+    display: block;
+    background: #ea580c;
+    color: #fff;
+    border-radius: 7px;
+    border: none;
+    padding: 10px 0;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+#copyBtn:hover {
+    background: #c2410c;
+}
+
+#birthdayCountdown, #specialMessage {
+    text-align: center;
+    word-break: break-word;
+}
+
+#darkModeToggle {
+    background: none;
+    border: none;
+    font-size: 1.2em;
+    cursor: pointer;
+    color: #18181b;
+    transition: color 0.2s;
+}
+
+#darkModeToggle:focus {
+    outline: 2px solid #ea580c;
+}
+
+/* Result section */
 .result-section {
     display: none;
     margin-top: 28px;
@@ -137,20 +190,19 @@ h1 {
     animation: fadeIn 0.5s;
 }
 
-/* --- Result section animation --- */
-/* Fade in effect when showing the result */
+/* Animations */
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(20px);}
     to { opacity: 1; transform: translateY(0);}
 }
 
-/* Age number pop-in animation for a lively effect */
 @keyframes popIn {
     0% { transform: scale(0.7); opacity: 0; }
     70% { transform: scale(1.2); opacity: 1; }
     100% { transform: scale(1); }
 }
 
+/* Age display */
 .age-display {
     display: flex;
     justify-content: center;
@@ -189,6 +241,18 @@ h1 {
     margin-top: 4px;
 }
 
+.compact-display {
+  font-size: 0.9em;
+  color: #52525b;
+  margin-top: 12px;
+  text-align: center;
+}
+
+.compact-display span {
+  font-weight: bold;
+  color: #ea580c;
+}
+
 .error-message {
     color: #b91c1c;
     background: #fef2f2;
@@ -200,96 +264,77 @@ h1 {
     font-size: 1em;
 }
 
-/* --- Copy button and countdown --- */
-/* Make copy button and countdown responsive */
-#copyBtn {
-    width: 100%;
-    max-width: 200px;
-    margin: 0 auto;
-    display: block;
-    background: #ea580c;
-    color: #fff;
-    border-radius: 7px;
-    border: none;
-    padding: 10px 0;
-    font-size: 1em;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background 0.2s;
-}
-#copyBtn:hover {
-    background: #c2410c;
-}
-
-#birthdayCountdown, #specialMessage {
-    text-align: center;
-    word-break: break-word;
-}
-
-#darkModeToggle {
-    background: none;
-    border: none;
-    font-size: 1.2em;
-    cursor: pointer;
-    color: #18181b;
-    transition: color 0.2s;
-}
-#darkModeToggle:focus {
-    outline: 2px solid #ea580c;
-}
-
-/* --- Dark Mode Styles --- */
-/* Switches background and text colors for dark mode */
+/* Dark mode styles */
 body.dark-mode {
     background: #18181b;
 }
+
 body.dark-mode .container {
     background: #232326;
     color: #fafafa;
     box-shadow: 0 4px 24px rgba(0,0,0,0.18);
 }
-/* Adjusts text and input colors for dark mode */
+
 body.dark-mode h1,
 body.dark-mode .input-group label,
 body.dark-mode .age-number {
     color: #fafafa;
 }
+
 body.dark-mode .intro,
 body.dark-mode #birthdayCountdown {
     color: #d4d4d8;
 }
+
 body.dark-mode .input-group input {
     background: #232326;
     color: #fafafa;
     border-color: #52525b;
 }
+
 body.dark-mode .input-group input:focus {
     background: #18181b;
     border-color: #ea580c;
 }
+
 body.dark-mode .age-item {
     background: #232326;
     box-shadow: 0 2px 8px rgba(0,0,0,0.18);
 }
+
 body.dark-mode #calculateBtn {
     background: #ea580c;
     color: #fff;
 }
-body.dark-mode #resetBtn {
+
+.dark-mode #clearResetBtn {
     background: #232326;
     color: #ea580c;
 }
+
+body.dark-mode #calculateBtn:hover {
+    background: #c2410c;
+}
+
+.dark-mode .compact-display {
+  color: #d4d4d8;
+}
+
+.dark-mode .compact-display span {
+  color: #f97316;
+}
+
 body.dark-mode #copyBtn {
     background: #ea580c;
     color: #fff;
 }
+
 body.dark-mode .error-message {
     background: #3f1d1d;
     color: #fca5a5;
 }
 
-/* --- Responsive Design --- */
-/* Makes layout mobile-friendly for small screens */
+/* Responsive design */
 @media (max-width: 600px) {
     body {
         font-size: 1.08em;
@@ -309,5 +354,8 @@ body.dark-mode .error-message {
     #copyBtn {
         font-size: 0.98em;
         padding: 9px 0;
+    }
+    .age-item.small {
+        min-width: 65px;
     }
 }
