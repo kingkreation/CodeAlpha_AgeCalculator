@@ -74,6 +74,6 @@ To view test cases, scenarios, and evidence:
 ## 🏁 Project Status
 
 - Completed & submitted as Task 1 for CodeAlpha Internship
-- Ready for future improvements like hosting and adding animations
+- Ready for future improvements like hosting and make it useful to the world
 
 ---
