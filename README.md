@@ -66,7 +66,7 @@ To view test cases, scenarios, and evidence:
 **Joshua Kolawole** (CA/JU3/3835)
 - BSc Physics
 - Web Development Intern @ CodeAlpha
-- QA Trainee @ TestarsQuarter
+- QA Trainee @ TestarsQuarter    
 🌐 [LinkedIn](https://www.linkedin.com/in/joshua-kolawole-40062a287) | ✉️ [Email](mailto:kolawolejoshua459@gmail.com)
 
 ---
