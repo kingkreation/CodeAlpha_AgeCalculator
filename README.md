@@ -1,6 +1,6 @@
 # CodeAlpha Age Calculator
 
-*Hosting in progres* |   [View Source Code](https://github.com/kingkreation/CodeAlpha_AgeCalculator.git)
+[Live Demo](https://kingkreation.github.io/CodeAlpha_AgeCalculator/)|   [View Source Code](https://github.com/kingkreation/CodeAlpha_AgeCalculator.git)
 
 ---
 
@@ -74,6 +74,6 @@ To view test cases, scenarios, and evidence:
 ## 🏁 Project Status
 
 - Completed & submitted as Task 1 for CodeAlpha Internship
-- Ready for future improvements like hosting and make it useful to the world
+- Ready for future improvements and make it useful to the world
 
 ---
