@@ -1,6 +1,6 @@
 # CodeAlpha Age Calculator
 
-[Live Demo](https://kingkreation.github.io/CodeAlpha_AgeCalculator/)|   [View Source Code](https://github.com/kingkreation/CodeAlpha_AgeCalculator.git)
+[Live Demo](https://kingkreation.github.io/CodeAlpha_AgeCalculator/)  |   [View Source Code](https://github.com/kingkreation/CodeAlpha_AgeCalculator.git)
 
 ---
 
